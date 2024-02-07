@@ -10,7 +10,7 @@ require("../conexion.php");
 
 //$ins = "insert into usuarios(nombre, apellido, rol, telefono, contraseña) values ('prueba','prueba' ,'prueba' ,'prueba' ,'prueba')"; // se descomenta para hacer la prueba
 
-$ins ="insert into administracion(nombre, descripcion, fecha, fo.usuarios) values('$params->nombre', '$params->descripcion', '$params->fecha', '$params->fousuarios',)";
+$ins ="insert into usuarios(fecha, observaciones, fo.herramientas, fo.procedimientos) values('$params->fecha', '$params->observaciones', '$params->foherramientas', '$params->foprocedimientos')";
 mysqli_query($conexion, $ins) or die('no inserto'); //se comenta para hacer pruebas
 
 

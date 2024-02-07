@@ -8,9 +8,9 @@ $params = json_decode($json); // se comenta para hacer pruebas
 
 require("../conexion.php");
 
-//$ins = "insert into usuarios(nombre, apellido, rol, telefono, contraseña) values ('prueba','prueba' ,'prueba' ,'prueba' ,'prueba')"; // se descomenta para hacer la prueba
+//$ins = "insert into categoria(clase) values ('prueba')"; // se descomenta para hacer la prueba
 
-$ins ="insert into administracion(nombre, descripcion, fecha, fo.usuarios) values('$params->nombre', '$params->descripcion', '$params->fecha', '$params->fousuarios',)";
+$ins ="insert into categoria(clase) values('$params->clase')";
 mysqli_query($conexion, $ins) or die('no inserto'); //se comenta para hacer pruebas
 
 
