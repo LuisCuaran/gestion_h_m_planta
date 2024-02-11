@@ -1,14 +1,21 @@
 <app-header></app-header>
-<div class="container-fluid"> <!-- copiadas desde index-dashboard -->
-    <div class="row">
-        <app-nav></app-nav> <!-- Aqui siempre queda el menu -->
-        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4"><!-- copiadas desde index-dashboard -->
-            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-              <router-outlet></router-outlet><!-- es donde siempre se van a cargar los trabajos -->
-            </div>
-        </main>
-    </div> 
-</div>  
+<div class="container-fluid">
+   <div class="row">
+     <!-- Menú a la izquierda -->
+     <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+       <!-- Contenido del menú -->
+       <app-nav></app-nav> <!-- Aqui siempre queda el menu -->
+     </nav>
+      
+     <!-- Área de trabajo (dashboard) a la derecha -->
+     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+       <!-- Contenido del dashboard -->
+       
+         <router-outlet></router-outlet>
+       
+     </main>
+   </div>
+ </div>
  
    
       

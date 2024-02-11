@@ -4,55 +4,61 @@
   <div class="position-sticky pt-3 sidebar-sticky">
     <ul class="nav flex-column">
         <li class="nav-item">
-          <a class="nav-link active " aria-current="page" href="#">
+          <a class="nav-link active " aria-current="page" [routerLink]="['/dashboard']">
             <span data-feather="home" class="aling-text-bottom"></span>
-           Administracion
+           dashboard
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">
+          <a class="nav-link" [routerLink]="['/administracion']">
+            <span data-feather="file" class="aling-text-bottom"></span>
+            Administracion
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/usuarios']">
             <span data-feather="file" class="aling-text-bottom"></span>
             Usuarios
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">
+          <a class="nav-link" [routerLink]="['/registros']">
             <span data-feather="file" class="aling-text-bottom"></span>
             Registros
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">
+          <a class="nav-link" [routerLink]="['/procedimientos']">
             <span data-feather="file" class="aling-text-bottom"></span>
             Procedimientos
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">
+          <a class="nav-link" [routerLink]="['/proveedor']">
             <span data-feather="file" class="aling-text-bottom"></span>
             Proveedor
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">
+          <a class="nav-link" [routerLink]="['/inventario']">
             <span data-feather="file" class="aling-text-bottom"></span>
             Inventario
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">
+          <a class="nav-link" [routerLink]="['/herramientas']">
             <span data-feather="file" class="aling-text-bottom"></span>
             Herramientas
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">
+          <a class="nav-link" [routerLink]="['/categoria']">
             <span data-feather="file" class="aling-text-bottom"></span>
             Categoria
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">
+          <a class="nav-link" [routerLink]="['/mantenimiento']">
             <span data-feather="file" class="aling-text-bottom"></span>
             Mantenimiento
           </a>

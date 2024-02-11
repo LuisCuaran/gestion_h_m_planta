@@ -8,7 +8,7 @@ $pamas = json_decode($json);
 
 require("../conexion.php");
 
-$editar = "UPDATE procedimientos SET nombre='$params->nombre', descripcion='$params->descripcion', fecha='$params->fecha', fo.usuarios='$params->fousuarios' WHERE id usuarios=$params->id_usuarios";
+$editar = "UPDATE procedimientos SET nombre='$params->nombre', descripcion='$params->descripcion', fecha='$params->fecha', fo.usuarios='$params->fousuarios' WHERE id_procedimientos=$params->id_procedimientos";
 mysql_query($conexion, $editar) or die('no edito');
 
 class Result {}

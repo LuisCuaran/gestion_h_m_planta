@@ -2,27 +2,57 @@
 header('Access-Control-Allow-Origin: *');
 header("Access-Control-Allow-Headers: origin, X-Requested-With, Content-Type, Accept");
 
-$json = file_get_contents("php://input"); // se comenta para hacer pruebas
-
-$params = json_decode($json); // se comenta para hacer pruebas
+$json = file_get_contents("php://input");
+$params = json_decode($json);
 
 require("../conexion.php");
 
-//$ins = "insert into usuarios(nombre, apellido, rol, telefono, contraseña) values ('prueba','prueba' ,'prueba' ,'prueba' ,'prueba')"; // se descomenta para hacer la prueba
+// Prevenir inyección SQL utilizando sentencias preparadas
+$ins = "INSERT INTO usuarios(nombre, apellido, rol, usuario, clave) VALUES (?, ?, ?, ?, ?)";
+$stmt = mysqli_prepare($conexion, $ins);
 
-$ins ="insert into usuarios(nombre, apellido, rol, telefono, contraseña) values('$params->nombre', '$params->apellido', '$params->rol', '$params->telefono', '$params->contraseña')";
-mysqli_query($conexion, $ins) or die('no inserto'); //se comenta para hacer pruebas
+// Verificar si la preparación de la sentencia fue exitosa
+if ($stmt) {
+    // Vincular parámetros y ejecutar la sentencia
+    mysqli_stmt_bind_param($stmt, 'sssss', $params->nombre, $params->apellido, $params->rol, $params->usuario, $params->clave);
+    $resultado = mysqli_stmt_execute($stmt);
 
+    // Verificar si la ejecución fue exitosa
+    if ($resultado) {
+        class Result {}
+        $response = new Result();
+        $response->resultado = 'OK';
+        $response->mensaje = 'Datos grabados';
 
-class Result {}
+        header('Content-Type: application/json');
+        echo json_encode($response);
+    } else {
+        // Manejar el caso en que la ejecución no fue exitosa
+        class Result {}
+        $response = new Result();
+        $response->resultado = 'Error';
+        $response->mensaje = 'No se pudieron grabar los datos';
 
-$response = new Result();
-$response->resultado = 'ok';
-$response->mensaje = 'datos grabados';
+        header('Content-Type: application/json');
+        echo json_encode($response);
+    }
 
-header('Content-Type: aplication/json');
-echo json_encode($response);
+    // Cerrar la sentencia preparada
+    mysqli_stmt_close($stmt);
+} else {
+    // Manejar el caso en que la preparación de la sentencia falló
+    class Result {}
+    $response = new Result();
+    $response->resultado = 'Error';
+    $response->mensaje = 'No se pudo preparar la sentencia SQL';
 
+    header('Content-Type: application/json');
+    echo json_encode($response);
+}
+
+// Cerrar la conexión
+mysqli_close($conexion);
 ?>
+
 
 
