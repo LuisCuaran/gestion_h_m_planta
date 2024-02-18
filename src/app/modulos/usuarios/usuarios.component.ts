@@ -108,9 +108,10 @@ export class UsuariosComponent implements OnInit {
 
 }
 
-pregunta(){ //funcion 
+pregunta(id: any, nombre:any){ //funcion 
+  console.log("entro con el id " + id);
   Swal.fire({
-    title: "Esta seguro de eliminar el usuario?",
+    title: 'Esta seguro de eliminar el usuario '+ nombre +'?',
     text: "El proceso no podra ser revertido!",
     icon: "warning",
     showCancelButton: true,
@@ -119,6 +120,7 @@ pregunta(){ //funcion
     confirmButtonText: "Si, Eliminar!"
   }).then((result) => {
     if (result.isConfirmed) {
+      this.borrarusuario(id);
       Swal.fire({
         title: "Eliminado!",
         text: "El usuario ha sido eliminado.",
@@ -127,5 +129,17 @@ pregunta(){ //funcion
     }
   });
 }
+
+borrarusuario(id:any){
+  console.log(id);
+  this.suser.eliminar(id).subscribe((datos:any)=> {
+    if(datos['resultado']=='OK'){
+      this.consulta();
+    }
+    
+  });
+  
+}
+
 }
 
