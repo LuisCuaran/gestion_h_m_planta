@@ -4,12 +4,14 @@ header("Access-Control-Allow-Headers: origin, X-Requested-With, Content-Type, Ac
 
 $json = file_get_contents('php://input');
 
-$pamas = json_decode($json);
+$params = json_decode($json);
+$id = $_GET['id'];
 
 require("../conexion.php");
 
-$editar = "UPDATE usuarios SET nombre='$params->nombre', apellido='$params->apellido', rol='$params->rol', usuario='$params->usuario', clave='$params->clave' WHERE id usuarios=$params->id_usuarios";
-mysql_query($conexion, $editar) or die('no edito');
+$editar = "UPDATE usuarios SET nombre='$params->nombre', apellido='$params->apellido', rol='$params->rol', usuario='$params->usuario', clave=sha1('$params->clave') WHERE id_usuarios=$id";
+mysqli_query($conexion, $editar) or die('no edito');
+
 
 class Result {}
 $response = new Result();
@@ -18,3 +20,5 @@ $response->mensaje = 'datos modificados';
 
 header('Content-Type: application/json');
 echo json_encode($response);
+
+

@@ -11,6 +11,7 @@ export class UsuariosComponent implements OnInit {
   //variables globales
   verf= false;
   usuario: any;
+  iduser:any;
   user = {//se crea una variable tipo objeto para desarrollar insertar
     nombre: "",
     apellido:"",
@@ -21,11 +22,12 @@ export class UsuariosComponent implements OnInit {
   };
 
   //para validar
-  validnombre= false;
-  validapellido = false;
-  validrol = false;
-  validusuario = false;
-  validclave = false;
+  validnombre= true;
+  validapellido = true;
+  validrol = true;
+  validusuario = true;
+  validclave = true;
+  beditar = false;
 
   constructor(private suser: UsuariosService) {}
   ngOnInit(): void {
@@ -38,6 +40,9 @@ export class UsuariosComponent implements OnInit {
     switch(dato){
       case 0:  //si es cero el formulario debe ocultarse
         this.verf = false;
+        this.beditar = false;
+        this.iduser = "";
+        this.limpiar();
         break;
         case 1:  //si es 1 el formulario no debe de ocultarse
           this.verf = true;
@@ -96,7 +101,7 @@ export class UsuariosComponent implements OnInit {
 
       if(this.validnombre==true && this.validapellido==true && this.validrol==true && this.validusuario==true && this.validclave){
     this.suser.insertar(this.user).subscribe((datos:any)=>{//se llama al servicio insertary mando los servicios donde los guarda y manda un resultado ok
-      if (datos[`resultado`]==`OK`) {
+      if (datos['resultado']=='OK') {
         //alert(datos['mensaje']);
         this.consulta();//muestra la consulta
       }
@@ -141,5 +146,32 @@ borrarusuario(id:any){
   
 }
 
+cargardatos(datos:any, id:number){
+ // console.log(datos, id);
+ this.user.nombre = datos.nombre;
+ this.user.apellido = datos.apellido;
+ this.user.rol = datos.rol;
+ this.user.usuario = datos.usuario;
+ this.user.clave = datos.clave;
+ this.iduser = id;
+ this.mostrar(1);
+ this.beditar=true;
+}
+
+editar(){
+ //console.log(this.user);
+ this.validar();
+
+ if(this.validnombre==true && this.validapellido==true && this.validrol==true && this.validusuario==true && this.validclave==true){
+this.suser.edit(this.user, this.iduser).subscribe((datos:any)=>{//se llama al servicio insertary    mando los servicios donde los guarda y manda un resultado ok
+  if (datos['resultado']=='OK') {
+   //alert(datos['mensaje']);
+    this.consulta();//muestra la consulta
+ }
+});
+this.mostrar(0);//mostrar, cero para que el formulario se muestre automaticamente
+}
+
+}
 }
 

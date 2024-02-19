@@ -30,7 +30,8 @@
     </div>
     <div class="row">
         <div class="col-lg-3">
-            <button class="btn btn-primary" (click)="ingresar()">Guardar</button>
+            <button *ngIf="beditar==false" class="btn btn-primary" (click)="ingresar()">Guardar</button>
+            <button *ngIf="beditar==true" class="btn btn-primary" (click)="editar()">Editar</button>
         </div>
         <div class="col-lg-3">
             <button class="btn btn-secondary" (click)="mostrar(0)">Cancelar</button>
@@ -48,7 +49,7 @@
         <th>Apellido</th>
         <th>Rol</th>
         <th>Telefono</th>
-        <th>Acciones</th>
+        <th>Opciones</th>
       </tr>
       <!--mostrar los usuarios-->
       <tr *ngFor="let item of usuario">
@@ -57,7 +58,7 @@
         <td>{{item.rol}}</td>
         <td>{{item.usuario}}</td>
         <td>
-            <a>
+            <a (click)="cargardatos(item, item.id_usuarios)">
                 <span class="fas fa-edit editar" title="Editar"></span>
             </a>
             <a (click)="pregunta(item.id_usuarios, item.nombre)">
